@@ -14,7 +14,12 @@ const updateItemDB = async (collection, document, item, data) => {
     });
 };
 
-const updateQuestionDB = async (questionID, answerID, queries, show = true) => {
+const setShowQuestionDB = async (
+  questionID,
+  answerID,
+  queries,
+  show = true
+) => {
   await firestore
     .collection("questions")
     .doc(questionID)
@@ -23,6 +28,15 @@ const updateQuestionDB = async (questionID, answerID, queries, show = true) => {
         ...queries,
         [`option${answerID}`]: { ...queries[`option${answerID}`], show },
       },
+    });
+};
+
+const setHideQuestionDB = (questionID, atr) => {
+  firestore
+    .collection("questions")
+    .doc(questionID)
+    .update({
+      [atr]: false,
     });
 };
 
@@ -64,6 +78,14 @@ const reducer = (state, action) => {
 
   if (action.type === "NEXT_QUESTION") {
     console.log("next question");
+    const { id: questionID } = action.payload.questions[
+      action.payload.questionNum
+    ];
+    for (var i = 1; i <= 10; i++) {
+      const attribute = `queries.option${i}.show`;
+      setHideQuestionDB(questionID, attribute);
+    }
+
     updateItemDB("questionNum", "number", "number", state.questionNum + 1);
     if (action.payload.questions.length === state.questionNum + 2) {
       return {
@@ -85,7 +107,7 @@ const reducer = (state, action) => {
       action.payload.questions[state.questionNum].queries
     );
     console.log("answer id:", action.payload.answerID);
-    updateQuestionDB(
+    setShowQuestionDB(
       action.payload.questionID,
       action.payload.answerID,
       action.payload.questions[state.questionNum].queries

@@ -61,7 +61,10 @@ const AppProvider = ({ children }) => {
   };
 
   const nextQuestion = () => {
-    dispatch({ type: "NEXT_QUESTION", payload: { questions } });
+    dispatch({
+      type: "NEXT_QUESTION",
+      payload: { questions, questionNum: state.questionNum },
+    });
   };
 
   const showAnswer = (questionID, answerID) => {
