@@ -27,6 +27,7 @@ const GameBox = () => {
 
   //   TODO nech posielam rovno cislo a nie taketo blbosti
   const { text, type, queries } = questions[questionNum];
+  const questionID = questions[questionNum].id;
   console.log(questionNum);
   return (
     <div className="flexbox">
@@ -34,58 +35,66 @@ const GameBox = () => {
         <section className="oval">
           <section className="question">{text}</section>
         </section>
-        {Object.values(queries).map(({ id, given, correct }, index) => {
-          return (
-            <>
-              <section
-                key={id}
-                className={`option`}
-                style={{
-                  transform: `translateX(${
-                    170 * Math.sin(((Math.PI * 2) / 10) * index)
-                  }px) translateY(${
-                    170 * Math.cos(((Math.PI * 2) / 10) * index)
-                  }px)`,
-                }}
-              >
-                {given}
-              </section>
-              <section
-                key={100 + id}
-                className={`answer-circle`}
-                style={{
-                  transform: `translateX(${
-                    290 * Math.sin(((Math.PI * 2) / 10) * index)
-                  }px) translateY(${
-                    290 * Math.cos(((Math.PI * 2) / 10) * index)
-                  }px)`,
-                }}
-                // onClick={() => showAnswer(id)}
-              >
-                {type === "spravne" && (
-                  <p className="answer-text">
-                    {correct ? (
-                      <AiFillCheckCircle className="icon icon-correct" />
-                    ) : (
-                      <AiFillCloseCircle className="icon icon-incorrect" />
-                    )}
-                  </p>
-                )}
-                {type === "farba" && (
-                  <p
-                    className="answer-text color"
-                    style={{
-                      backgroundColor: colorTranslator[correct][0],
-                      color: colorTranslator[correct][1],
-                    }}
-                  >
-                    {correct}
-                  </p>
-                )}
-              </section>
-            </>
-          );
-        })}
+        {Object.values(queries).map(
+          ({ id: answerID, given, correct, show }, index) => {
+            return (
+              <div key={answerID}>
+                <section
+                  className="option"
+                  style={{
+                    transform: `translateX(${
+                      170 * Math.sin(((Math.PI * 2) / 10) * index)
+                    }px) translateY(${
+                      170 * Math.cos(((Math.PI * 2) / 10) * index)
+                    }px)`,
+                  }}
+                >
+                  {given}
+                </section>
+                <section
+                  className={`answer-circle ${show && "show"}`}
+                  style={{
+                    transform: `translateX(${
+                      290 * Math.sin(((Math.PI * 2) / 10) * index)
+                    }px) translateY(${
+                      290 * Math.cos(((Math.PI * 2) / 10) * index)
+                    }px)`,
+                  }}
+                  onClick={() => showAnswer(questionID, answerID)}
+                >
+                  {type === "spravne" && (
+                    <p className={`answer-text ${show && "show"}`}>
+                      {correct ? (
+                        <AiFillCheckCircle className="icon icon-correct" />
+                      ) : (
+                        <AiFillCloseCircle className="icon icon-incorrect" />
+                      )}
+                    </p>
+                  )}
+                  {type === "farba" && (
+                    <p
+                      className={`answer-text color ${show && "show"}`}
+                      style={{
+                        backgroundColor: colorTranslator[correct][0],
+                        color: colorTranslator[correct][1],
+                      }}
+                    >
+                      {correct}
+                    </p>
+                  )}
+                  {type === "poradie" && (
+                    <p className={`answer-text ${show && "show"}`}>{correct}</p>
+                  )}
+                  {type === "odpoved" && (
+                    <p className={`answer-text  ${show && "show"}`}>
+                      {correct}
+                    </p>
+                  )}
+                </section>
+              </div>
+            );
+          }
+        )}
       </article>
       {!questionLast && (
         <button onClick={nextQuestion} className="next-question">

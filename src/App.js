@@ -27,7 +27,7 @@ function App() {
   if (admin) {
     return <AdminPanel />;
   }
-  if (true) {
+  if (isLoggedIn) {
     return <Game />;
   } else {
     return (

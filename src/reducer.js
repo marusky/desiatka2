@@ -14,6 +14,18 @@ const updateItemDB = async (collection, document, item, data) => {
     });
 };
 
+const updateQuestionDB = async (questionID, answerID, queries, show = true) => {
+  await firestore
+    .collection("questions")
+    .doc(questionID)
+    .update({
+      queries: {
+        ...queries,
+        [`option${answerID}`]: { ...queries[`option${answerID}`], show },
+      },
+    });
+};
+
 const reducer = (state, action) => {
   if (action.type === "JOIN_GAME") {
     addToDB("players", { name: action.payload.name, points: 0 });
@@ -66,7 +78,18 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "SHOW_ANSWER") {
-    console.log("show answer, id:", action.payload.id);
+    console.log("question id:", action.payload.questionID);
+    console.log("question num:", state.questionNum);
+    console.log(
+      "question queries:",
+      action.payload.questions[state.questionNum].queries
+    );
+    console.log("answer id:", action.payload.answerID);
+    updateQuestionDB(
+      action.payload.questionID,
+      action.payload.answerID,
+      action.payload.questions[state.questionNum].queries
+    );
     return { ...state };
   }
 

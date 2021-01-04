@@ -296,12 +296,13 @@ button.unit .icon {
 
   .answer-text {
     opacity: 0;
+    text-shadow: none;
   }
-  .answer-text .show {
+  .answer-text.show {
     opacity: 1;
   }
 
-  .answer-circle .show {
+  .answer-circle.show {
     background-color: white;
   }
 

@@ -64,8 +64,11 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "NEXT_QUESTION", payload: { questions } });
   };
 
-  const showAnswer = (id) => {
-    dispatch({ type: "SHOW_ANSWER", payload: { id } });
+  const showAnswer = (questionID, answerID) => {
+    dispatch({
+      type: "SHOW_ANSWER",
+      payload: { questionID, answerID, questions },
+    });
   };
 
   if (loadingP || loadingQ || loadingN) {
@@ -96,6 +99,7 @@ const AppProvider = ({ children }) => {
           loadingN,
           questions,
           questionNum,
+          showAnswer,
           handleSubmit,
           addQuestion,
           nextQuestion,
