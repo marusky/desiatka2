@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Form from "./Form";
+import Game from "./Game";
+import { useGlobalContext } from "./context";
+import Players from "./Players";
+import Loading from "./Loading";
+import AdminPanel from "./AdminPanel";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const {
+    admin,
+    player: { isLoggedIn },
+    errorP,
+    errorQ,
+    errorN,
+    loadingP,
+    loadingQ,
+    loadingN,
+  } = useGlobalContext();
+
+  if (loadingP || loadingQ || loadingN) {
+    return <Loading />;
+  }
+  if (errorP || errorQ || errorN) {
+    return <div>{errorP || errorQ || errorN}</div>;
+  }
+  if (admin) {
+    return <AdminPanel />;
+  }
+  if (true) {
+    return <Game />;
+  } else {
+    return (
+      <>
+        {/* <Players /> */}
+        <Form />
+      </>
+    );
+  }
 }
 
 export default App;
