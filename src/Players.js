@@ -5,22 +5,21 @@ const Players = () => {
   const { players, changeScore } = useGlobalContext();
   return (
     <div className="players">
-      <h4>In Game:</h4>
       {players &&
         players.map((player) => {
           return (
             <section key={player.id} className="player">
-              {player.name}
-              <div className="segment">
+              <h3>{player.name}</h3>
+              <div className="player-score">
                 <button
-                  className="unit"
+                  className="unit minus"
                   onClick={() => changeScore(-1, player.name)}
                 >
                   -
                 </button>
                 {player.points}
                 <button
-                  className="unit"
+                  className="unit plus"
                   onClick={() => changeScore(1, player.name)}
                 >
                   +
