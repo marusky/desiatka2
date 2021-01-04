@@ -2,7 +2,6 @@ import "./App.css";
 import Form from "./Form";
 import Game from "./Game";
 import { useGlobalContext } from "./context";
-import Players from "./Players";
 import Loading from "./Loading";
 import AdminPanel from "./AdminPanel";
 

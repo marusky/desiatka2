@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useGlobalContext } from "./context";
 import QuestionModal from "./QuestionModal";
 
 const buttons = [
