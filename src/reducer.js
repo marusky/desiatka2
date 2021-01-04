@@ -43,10 +43,10 @@ const setHideQuestionDB = (questionID, atr) => {
 const reducer = (state, action) => {
   if (action.type === "JOIN_GAME") {
     addToDB("players", { name: action.payload.name, points: 0 });
-    console.log("Player joined game:", {
-      name: action.payload.name,
-      points: 0,
-    });
+    // console.log("Player joined game:", {
+    //   name: action.payload.name,
+    //   points: 0,
+    // });
     return {
       ...state,
       player: { ...state.player, name: action.payload.name, isLoggedIn: true },
@@ -54,14 +54,14 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "NO_NAME") {
-    console.log("no val");
+    // console.log("no val");
     return {
       ...state,
     };
   }
 
   if (action.type === "ADMIN") {
-    console.log("admin is here fellas");
+    // console.log("admin is here fellas");
     return {
       ...state,
       admin: true,
@@ -69,7 +69,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "ADD_QUESTION") {
-    console.log("question added");
+    // console.log("question added");
     addToDB("questions", action.payload);
     return {
       ...state,
@@ -77,7 +77,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "NEXT_QUESTION") {
-    console.log("next question");
+    // console.log("next question");
     const { id: questionID } = action.payload.questions[
       action.payload.questionNum
     ];
@@ -100,13 +100,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "SHOW_ANSWER") {
-    console.log("question id:", action.payload.questionID);
-    console.log("question num:", state.questionNum);
-    console.log(
-      "question queries:",
-      action.payload.questions[state.questionNum].queries
-    );
-    console.log("answer id:", action.payload.answerID);
+    // console.log('show answer');
     setShowQuestionDB(
       action.payload.questionID,
       action.payload.answerID,
@@ -116,7 +110,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "UPDATE_QUESTION") {
-    console.log("update question");
+    // console.log("update question");
     if (action.payload.questionNum + 1 === action.payload.questions.length) {
       var questionLast = true;
     }
@@ -124,6 +118,17 @@ const reducer = (state, action) => {
       ...state,
       questionNum: action.payload.questionNum,
       questionLast,
+    };
+  }
+
+  if (action.type === "CHANGE_SCORE") {
+    // console.log("change score");
+    const { players, name, amount } = action.payload;
+    const player = players.find((player) => player.name === name);
+    updateItemDB("players", player.id, "points", player.points + amount);
+
+    return {
+      ...state,
     };
   }
   throw new Error("no matching action type");

@@ -74,6 +74,13 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const changeScore = (amount, name) => {
+    dispatch({
+      type: "CHANGE_SCORE",
+      payload: { players, amount, name },
+    });
+  };
+
   if (loadingP || loadingQ || loadingN) {
     return (
       <AppContext.Provider value={{}}>
@@ -106,6 +113,7 @@ const AppProvider = ({ children }) => {
           handleSubmit,
           addQuestion,
           nextQuestion,
+          changeScore,
         }}
       >
         {children}

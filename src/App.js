@@ -27,15 +27,10 @@ function App() {
   if (admin) {
     return <AdminPanel />;
   }
-  if (isLoggedIn) {
+  if (true) {
     return <Game />;
   } else {
-    return (
-      <>
-        {/* <Players /> */}
-        <Form />
-      </>
-    );
+    return <Form />;
   }
 }
 
