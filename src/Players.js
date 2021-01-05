@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "./context";
 import { FaBars } from "react-icons/fa";
 
 const Players = () => {
   const { players, changeScore } = useGlobalContext();
+  const [isScoreOpen, setIsScoreOpen] = useState(false);
   return (
     <div>
-      <icon className="openPoints">
+      <div className="openPoints" onClick={() => setIsScoreOpen(!isScoreOpen)}>
         <FaBars />
-      </icon>
-      <div className="players show">
+      </div>
+      <div className={isScoreOpen ? "players show" : "players"}>
         {players &&
           players.map((player) => {
             return (
