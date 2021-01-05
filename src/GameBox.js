@@ -26,10 +26,9 @@ const GameBox = () => {
     showAnswer,
   } = useGlobalContext();
 
-  //   TODO nech posielam rovno cislo a nie taketo blbosti
   const { text, type, queries } = questions[questionNum];
   const questionID = questions[questionNum].id;
-  console.log(questionNum);
+
   return (
     <div className="flexbox">
       <article className="box">

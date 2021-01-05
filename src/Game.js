@@ -5,8 +5,8 @@ import Players from "./Players";
 const Game = () => {
   return (
     <div>
-      <Players />
       <GameBox />
+      <Players />
     </div>
   );
 };
