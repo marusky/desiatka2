@@ -234,7 +234,7 @@ button.unit .icon {
   }
   .oval {
     background-color: white;
-    /* border: 1px solid black; */
+    border: 1px solid black;
     padding: 130px;
     width: 200px;
     height: 200px;
@@ -260,7 +260,9 @@ button.unit .icon {
 
   .option {
     color: black;
-    border: 1px solid black;
+    background-color: white;
+    /* border: 1px solid black; */
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -286,6 +288,71 @@ button.unit .icon {
     left: 300px;
     top: 300px;
     cursor: pointer;
+  }
+
+  .line {
+    width: 1px;
+    height: 135px;
+    background-color: black;
+    position: absolute;
+    z-index: 0;
+  }
+
+  .line-1 {
+    left: 349px;
+    top: 120px;
+  }
+
+  .line-2 {
+    left: 443px;
+    top: 150px;
+    transform: rotate(36deg);
+  }
+
+  .line-3 {
+    left: 505px;
+    top: 231px;
+    transform: rotate(72deg);
+  }
+  .line-4 {
+    left: 505px;
+    top: 334px;
+    transform: rotate(108deg);
+  }
+  .line-5 {
+    left: 443px;
+    top: 417px;
+    transform: rotate(144deg);
+  }
+
+  .line-6 {
+    left: 349px;
+    top: 446px;
+  }
+
+  .line-7 {
+    left: 257px;
+    top: 417px;
+    transform: rotate(216deg);
+  }
+
+  .line-8 {
+    left: 195px;
+    top: 334px;
+    transform: rotate(254deg);
+  }
+
+  .line-9 {
+    left: 196px;
+    top: 232px;
+
+    transform: rotate(290deg);
+  }
+
+  .line-10 {
+    left: 257px;
+    top: 150px;
+    transform: rotate(324deg);
   }
 
   .answer-text {
@@ -323,18 +390,15 @@ button.unit .icon {
   .players {
     position: fixed;
     top: 5%;
-    left: 82%;
+    left: 2%;
   }
   .player {
     text-align: center;
-    /* border-bottom: 0.5px solid black; */
     margin-bottom: 30px;
-    /* border: 1px solid black; */
   }
   .player h3 {
     margin-bottom: 5px;
     font-weight: lighter;
-    /* letter-spacing: 1px; */
   }
   .player-score {
     padding-bottom: 15px;
@@ -342,5 +406,13 @@ button.unit .icon {
   }
   .unit.minus {
     color: red;
+  }
+  .next-question {
+    position: fixed;
+    top: 45%;
+    right: 2%;
+    width: 100px;
+    height: 100px;
+    color: black;
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useGlobalContext } from "./context";
 import { AiFillCloseCircle, AiFillCheckCircle } from "react-icons/ai";
+import { GrNext } from "react-icons/gr";
 
 const colorTranslator = {
   biela: ["white", "black"],
@@ -91,6 +92,7 @@ const GameBox = () => {
                     </p>
                   )}
                 </section>
+                <section className={`line line-${answerID}`}></section>
               </div>
             );
           }
@@ -98,7 +100,7 @@ const GameBox = () => {
       </article>
       {!questionLast && (
         <button onClick={nextQuestion} className="next-question">
-          Next Question ({questionNum + 2}.) {questionLast}
+          <GrNext />
         </button>
       )}
     </div>
