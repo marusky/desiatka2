@@ -13,7 +13,7 @@ const Form = () => {
     <section className="center">
       <form onSubmit={(e) => handleSubmit(e, name)} className="neomorph">
         <div className="segment">
-          <h1>Desiatka</h1>
+          <h1>Dvadsiatka</h1>
         </div>
         <label>
           <input
