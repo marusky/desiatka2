@@ -245,6 +245,19 @@ button.unit .icon {
   color: red;
 }
 
+.logout-btn {
+  position: fixed;
+  top: 4%;
+  right: 4%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: salmon;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
 @media only screen and (min-width: 1000px) {
   .box {
     background-color: #f19925;

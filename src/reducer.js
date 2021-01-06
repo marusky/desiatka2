@@ -42,14 +42,21 @@ const setHideQuestionDB = (questionID, atr) => {
 
 const reducer = (state, action) => {
   if (action.type === "JOIN_GAME") {
-    addToDB("players", { name: action.payload.name, points: 0 });
     // console.log("Player joined game:", {
     //   name: action.payload.name,
     //   points: 0,
     // });
+    var signUpName = action.payload.name;
+    const localName = localStorage.getItem("desiatka_name");
+
+    if (!localName) {
+      addToDB("players", { name: signUpName, points: 0 });
+      localStorage.setItem("desiatka_name", JSON.stringify(signUpName));
+    }
+
     return {
       ...state,
-      player: { ...state.player, name: action.payload.name, isLoggedIn: true },
+      player: { ...state.player, name: signUpName, isLoggedIn: true },
     };
   }
 
@@ -130,6 +137,14 @@ const reducer = (state, action) => {
     return {
       ...state,
     };
+  }
+
+  if (action.type === "LOGOUT") {
+    localStorage.removeItem("desiatka_name");
+    const players = action.payload;
+    const player = players.find((player) => player.name === state.player.name);
+    firestore.collection("players").doc(player.id).delete();
+    return { ...state, player: { name: "", points: 0, isLoggedIn: false } };
   }
   throw new Error("no matching action type");
 };

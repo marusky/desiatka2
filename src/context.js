@@ -42,8 +42,6 @@ const AppProvider = ({ children }) => {
 
   const handleSubmit = async (e, name) => {
     e.preventDefault();
-    console.log("submit name:", name);
-    console.log(name === "admin");
     if (name === "admin") {
       dispatch({ type: "ADMIN" });
     } else if (name) {
@@ -81,6 +79,10 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const logout = () => {
+    dispatch({ type: "LOGOUT", payload: players });
+  };
+
   if (loadingP || loadingQ || loadingN) {
     return (
       <AppContext.Provider value={{}}>
@@ -114,6 +116,7 @@ const AppProvider = ({ children }) => {
           addQuestion,
           nextQuestion,
           changeScore,
+          logout,
         }}
       >
         {children}
