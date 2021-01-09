@@ -434,6 +434,9 @@ button.unit .icon {
     align-items: center;
     justify-content: center;
   }
+  .openPoints {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 999px) {
