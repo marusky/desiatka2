@@ -11,10 +11,12 @@ const colorTranslator = {
   modrá: ["blue", "white"],
   zelená: ["green", "white"],
   ružová: ["pink", "black"],
+  purpurová: ["purple", "white"],
   fialová: ["purple", "white"],
   hnedá: ["brown", "white"],
   sivá: ["gray", "white"],
   čierna: ["black", "white"],
+  magenta: ["magenta", "white"],
 };
 
 const GameBox = () => {
@@ -35,8 +37,9 @@ const GameBox = () => {
         <section className="oval">
           <section className="question">{text}</section>
         </section>
-        {Object.values(queries).map(
-          ({ id: answerID, given, correct, show }, index) => {
+        {Object.values(queries)
+          .sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0))
+          .map(({ id: answerID, given, correct, show }, index) => {
             return (
               <div key={answerID}>
                 <section
@@ -94,8 +97,7 @@ const GameBox = () => {
                 <section className={`line line-${answerID}`}></section>
               </div>
             );
-          }
-        )}
+          })}
       </article>
       {!questionLast && (
         <button onClick={nextQuestion} className="next-question">
